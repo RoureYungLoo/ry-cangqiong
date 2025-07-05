@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luruoyang.mapper.admin.EmpMapper">
+    <!--  添加员工  -->
+    <insert id="saveEmp" parameterType="com.luruoyang.entity.Employ">
+        insert into employee
+        values (#{id},
+                #{name},
+                #{username},
+                #{password},
+                #{phone},
+                #{sex},
+                #{idNumber},
+                #{status},
+                #{createTime},
+                #{updateTime},
+                #{createUser},
+                #{updateUser})
+    </insert>
+    <!-- 更新员工账户状态 -->
+    <update id="changeStatus">
+        update employee e
+        set status      = #{status},
+            update_time = #{updateTime},
+            update_user = #{updateUser}
+        where id = #{empId}
+    </update>
+    <!--  根据ID更新账户  -->
+    <update id="updateById" parameterType="com.luruoyang.entity.Employ">
+        update employee
+        <set>
+            <if test="name != null and name != '' ">
+                name = #{name},
+            </if>
+            <if test="username != null and username != '' ">
+                username = #{username},
+            </if>
+            <if test="password != null and password != '' ">
+                password = #{password},
+            </if>
+            <if test="phone != null and phone != '' ">
+                phone = #{phone},
+            </if>
+            <if test="sex != null and sex != '' ">
+                sex = #{sex},
+            </if>
+            <if test="idNumber != null and idNumber != '' ">
+                id_number = #{idNumber},
+            </if>
+            <if test="status != null ">
+                status = #{status},
+            </if>
+            <if test="createTime != null ">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null ">
+                update_time = #{updateTime},
+            </if>
+            <if test="createUser != null ">
+                create_user = #{createUser},
+            </if>
+            <if test="updateUser != null ">
+                update_user = #{updateUser}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!--  根据用户名查询   -->
+    <select id="findEmpByUserName" resultType="com.luruoyang.entity.Employ">
+        select e.id, e.name, e.password, e.username
+        from employee e
+        where e.username = #{username}
+    </select>
+    <!--  分页查询  -->
+    <select id="findEmpPage" resultType="com.luruoyang.entity.Employ"
+            parameterType="com.luruoyang.dto.EmpPageDto">
+        select id,
+        name,
+        username,
+        password,
+        phone,
+        sex,
+        id_number as idNumber,
+        status,
+        create_time as createTime,
+        update_time as updateTime,
+        create_user as createUser,
+        update_user as updateUser
+        from employee
+        <where>
+            <if test="name != null and name != '' ">
+                name like concat('%', #{name}, '%')
+            </if>
+        </where>
+        ORDER BY update_time DESC
+    </select>
+    <!--  根据ID查询员工  -->
+    <select id="findEmpById" resultType="com.luruoyang.entity.Employ" parameterType="java.lang.Long">
+        select id,
+               name,
+               username,
+               password,
+               phone,
+               sex,
+               id_number   as idNumber,
+               status,
+               create_time as createTime,
+               update_time as updateTime,
+               create_user as createUser,
+               update_user as updateUser
+        from employee
+        where id = #{empId}
+    </select>
+</mapper>

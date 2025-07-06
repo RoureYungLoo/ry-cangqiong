@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
@@ -43,7 +44,9 @@ public class CategoryServiceImpl implements CategoryService {
     category.setStatus(0);
 
     /* 清空缓存 */
-    redisTemplate.opsForValue().getAndDelete(RedisKey.CATEGORY_LIST + "::" + category.getType());
+    String cateList = RedisKey.CATEGORY_LIST + "::" + category.getType();
+
+    redisTemplate.delete(cateList);
 
     int row = categoryMapper.save(category);
     return row == 1;
@@ -62,8 +65,12 @@ public class CategoryServiceImpl implements CategoryService {
   @Override
   public boolean deleteById(Long id) {
     int row = categoryMapper.deleteById(id);
-
+    Category category = categoryMapper.findById(id);
+    Integer type = category.getType();
+    String cateList = RedisKey.CATEGORY_LIST + "::" + type;
     /* 清空缓存 */
+    redisTemplate.delete(cateList);
+
     return row == 1;
   }
 
@@ -79,6 +86,9 @@ public class CategoryServiceImpl implements CategoryService {
     int row = categoryMapper.updateById(categoryDB);
 
     /* 清空缓存 */
+    Integer type = categoryDB.getType();
+    String cateList = RedisKey.CATEGORY_LIST + "::" + type;
+    redisTemplate.delete(cateList);
 
     return row == 1;
   }
@@ -95,6 +105,10 @@ public class CategoryServiceImpl implements CategoryService {
     int row = categoryMapper.updateById(categoryDB);
 
     /* 清空缓存 */
+    Integer type = categoryDB.getType();
+    String cateList = RedisKey.CATEGORY_LIST + "::" + type;
+    redisTemplate.delete(cateList);
+
     return row == 1;
   }
 
@@ -109,7 +123,7 @@ public class CategoryServiceImpl implements CategoryService {
     if (categoryList == null || categoryList.isEmpty()) {
       log.warn("菜品分类 未命中缓存");
       categoryList = categoryMapper.list(type);
-      redis.set(key, categoryList);
+      redis.set(key, categoryList,30, TimeUnit.MINUTES);
     } else {
       log.warn("菜品分类 命中缓存");
     }

@@ -8,9 +8,8 @@
     <description>cangqion-pojo</description>
     <parent>
         <groupId>com.luruoyang</groupId>
-        <artifactId>cangqiong-base</artifactId>
+        <artifactId>cangqiong</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../cangqion-base/pom.xml</relativePath>
     </parent>
 
     <dependencies>

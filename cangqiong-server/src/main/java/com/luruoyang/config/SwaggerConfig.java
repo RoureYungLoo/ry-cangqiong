@@ -14,7 +14,9 @@ public class SwaggerConfig {
   @Bean
   public OpenAPI openAPIInfo() {
     return new OpenAPI()
+
         .info(new Info()
+
             .title("外卖管理系统")
             .contact(new Contact().url("http://contact.me").name("禄若阳").email("694306515@qq.com"))
             .description("一个外卖管理系统, 可供商家、骑手、用户使用")

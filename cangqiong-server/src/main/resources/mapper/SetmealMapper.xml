@@ -167,4 +167,15 @@
         where s.id = #{setmealId}
           and d.status = #{dishStatus};
     </select>
+    <select id="findByCategroyId" resultType="com.luruoyang.entity.Setmeal" parameterType="java.lang.Long">
+        select id,
+        name,
+        price,
+        status,
+        description,
+        image,
+        <include refid="baseSql"/>
+        from setmeal s
+        where category_id = #{categoryId}
+    </select>
 </mapper>

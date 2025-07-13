@@ -99,7 +99,13 @@
         status,
         <include refid="baseMapping"/>
         from category
-        where type = #{type}
-        and status = 1
+        <where>
+            <if test="type != null">
+                type = #{type}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
     </select>
 </mapper>

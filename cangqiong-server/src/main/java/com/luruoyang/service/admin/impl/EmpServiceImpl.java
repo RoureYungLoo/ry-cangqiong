@@ -12,6 +12,7 @@ import com.luruoyang.enums.Default;
 import com.luruoyang.enums.EmpError;
 import com.luruoyang.exception.BusinessException;
 import com.luruoyang.mapper.admin.EmpMapper;
+import com.luruoyang.properties.JJwtProperties;
 import com.luruoyang.service.admin.EmpService;
 import com.luruoyang.utils.JJwtUtils;
 import com.luruoyang.utils.PageResult;
@@ -40,6 +41,8 @@ public class EmpServiceImpl implements EmpService {
 
   @Autowired
   private JJwtUtils jwtUtils;
+  @Autowired
+  private JJwtProperties jJwtProperties;
 
   @Override
   public LoginUserVo login(LoginDto loginDto) {
@@ -62,7 +65,7 @@ public class EmpServiceImpl implements EmpService {
     claims.put("name", emp.getName());
     claims.put("username", emp.getUsername());
 
-    String token = jwtUtils.gen(claims);
+    String token = jwtUtils.gen(claims, jJwtProperties.getAdminSecret(), jJwtProperties.getAdminExpiration());
     return LoginUserVo.builder()
         .id(emp.getId())
         .name(emp.getName())

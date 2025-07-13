@@ -18,9 +18,19 @@ mybatis:
     map-underscore-to-camel-case: true
   mapper-locations: classpath:mapper/**/*.xml
 
-jjwt:
-  secret: "12345678901234561234567890123456"
-  expiration: 1209600000 # 14 days
+cangqiong:
+  jjwt:
+    admin-secret: 12345678901234561234567890123abc
+    admin-expiration: 1209600000 # 14 days
+    admin-token-name: token
+    user-secret-key: 12345678901234561234567890123abc
+    user-ttl: 1209600000
+    user-token-name: authentication
+
+  wechat:
+    auth-url: https://api.weixin.qq.com/sns/jscode2session
+    appid: wx718e2a5c0a79ad8a
+    secret: 9e62707b606171dde26079f7444ce4d8
 
 springdoc:
   swagger-ui:
@@ -58,3 +68,12 @@ aliyun:
 logging:
   pattern:
     console: "%5p %-40.40logger{39} : %method:%line - %m%n"
+
+
+baidu:
+  weather:
+    key: ${BAIDU_KEY}
+
+gaode:
+  map:
+    key: ${GAODE_KEY}

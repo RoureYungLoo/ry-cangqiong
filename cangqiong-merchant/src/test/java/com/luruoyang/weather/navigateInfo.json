@@ -1,0 +1,81 @@
+{
+  "status": "1",
+  "info": "OK",
+  "infocode": "10000",
+  "count": "1",
+  "route": {
+    "origin": "113.840576,34.571866",
+    "destination": "113.861685,34.565051",
+    "paths": [
+      {
+        "distance": "2986",
+        "duration": "865",
+        "steps": [
+          {
+            "instruction": "沿慈航路向东骑行1156米右转",
+            "orientation": "东",
+            "road_name": "慈航路",
+            "step_distance": 1156,
+            "cost": {
+              "duration": "335"
+            }
+          },
+          {
+            "instruction": "沿凌风街向南骑行427米左转",
+            "orientation": "南",
+            "road_name": "凌风街",
+            "step_distance": 427,
+            "cost": {
+              "duration": "124"
+            }
+          },
+          {
+            "instruction": "骑行582米直行",
+            "orientation": "",
+            "road_name": "",
+            "step_distance": 582,
+            "cost": {
+              "duration": "169"
+            }
+          },
+          {
+            "instruction": "骑行41米直行",
+            "orientation": "",
+            "road_name": "",
+            "step_distance": 41,
+            "cost": {
+              "duration": "12"
+            }
+          },
+          {
+            "instruction": "沿鄱阳湖路向东骑行333米右转",
+            "orientation": "东",
+            "road_name": "鄱阳湖路",
+            "step_distance": 333,
+            "cost": {
+              "duration": "96"
+            }
+          },
+          {
+            "instruction": "沿相州街向南骑行291米右转",
+            "orientation": "南",
+            "road_name": "相州街",
+            "step_distance": 291,
+            "cost": {
+              "duration": "84"
+            }
+          },
+          {
+            "instruction": "沿大河刘路向西骑行156米到达目的地",
+            "orientation": "西",
+            "road_name": "大河刘路",
+            "step_distance": 156,
+            "cost": {
+              "duration": "45"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

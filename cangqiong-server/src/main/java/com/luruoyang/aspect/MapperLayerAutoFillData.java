@@ -20,49 +20,67 @@ import java.time.format.DateTimeFormatter;
 @Component
 public class MapperLayerAutoFillData {
 
-  @Pointcut("execution(* com.luruoyang.mapper.admin.*.save*(*))")
+  @Pointcut("execution(* com.luruoyang.mapper..*.save*(*))")
   public void save() {
   }
 
-  @Pointcut("execution(public * com.luruoyang.mapper.admin.*.update*(*))")
+  @Pointcut("execution(public * com.luruoyang.mapper..*.update*(*))")
   public void update() {
   }
 
-  @Around("save()")
+  @Around("save() || update()")
   public Object aroundAdviceSave(ProceedingJoinPoint pjp) throws Throwable {
     Object returnValue = null;
     try {
       Object[] args = pjp.getArgs();
       Object arg = args[0];
       log.warn("-------> arg:{}", arg);
+      LocalDateTime now = LocalDateTime.now();
+      Long currentUser = ThreadLocalContext.get();
       Class<?> clazz = arg.getClass();
+
       Method setCreateTime;
       Method setUpdateTime;
       Method setCreateUser;
       Method setUpdateUser;
+
       try {
         PropertyDescriptor createTime = new PropertyDescriptor("createTime", clazz);
-        PropertyDescriptor updateTime = new PropertyDescriptor("updateTime", clazz);
-        PropertyDescriptor createUser = new PropertyDescriptor("createUser", clazz);
-        PropertyDescriptor updateUser = new PropertyDescriptor("updateUser", clazz);
-
         setCreateTime = createTime.getWriteMethod();
-        setUpdateTime = updateTime.getWriteMethod();
-        setCreateUser = createUser.getWriteMethod();
-        setUpdateUser = updateUser.getWriteMethod();
-
-        LocalDateTime now = LocalDateTime.now();
-        Long currentUser = ThreadLocalContext.get();
         setCreateTime.invoke(arg, now);
-        setUpdateTime.invoke(arg, now);
-        setCreateUser.invoke(arg, currentUser);
-        setUpdateUser.invoke(arg, currentUser);
-
-      } catch (IntrospectionException | InvocationTargetException | IllegalArgumentException |
-               IllegalAccessException e) {
-        log.warn("------>  {}: {}", arg.getClass(), e.getMessage());
+      } catch (Exception e) {
+        log.warn(" [warn]: {}", e.getMessage());
+        e.printStackTrace();
       }
 
+      try {
+        PropertyDescriptor updateTime = new PropertyDescriptor("updateTime", clazz);
+        setUpdateTime = updateTime.getWriteMethod();
+        setUpdateTime.invoke(arg, now);
+      } catch (Exception e) {
+        log.warn(" [warn]: {}", e.getMessage());
+        e.printStackTrace();
+      }
+
+      try {
+        PropertyDescriptor createUser = new PropertyDescriptor("createUser", clazz);
+        setCreateUser = createUser.getWriteMethod();
+        setCreateUser.invoke(arg, currentUser);
+      } catch (Exception e) {
+        log.warn(" [warn]: {}", e.getMessage());
+        e.printStackTrace();
+      }
+
+      try {
+        PropertyDescriptor updateUser = new PropertyDescriptor("updateUser", clazz);
+        setUpdateUser = updateUser.getWriteMethod();
+        setUpdateUser.invoke(arg, currentUser);
+      } catch (Exception e) {
+        log.warn(" [warn]: {}", e.getMessage());
+        e.printStackTrace();
+      }
+
+      log.error("==============>>>>>>>>>>>>>>>>> 前置通知 ");
       returnValue = pjp.proceed();
 
     } catch (Throwable e) {
@@ -74,8 +92,9 @@ public class MapperLayerAutoFillData {
 
     return returnValue;
   }
+}
 
-
+/*
   @Around("update()")
   public Object aroundAdviceUpdate(ProceedingJoinPoint pjp) throws Throwable {
 
@@ -113,4 +132,4 @@ public class MapperLayerAutoFillData {
     }
     return returnValue;
   }
-}
+}*/

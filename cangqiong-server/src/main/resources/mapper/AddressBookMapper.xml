@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luruoyang.mapper.user.AddressbookMapper">
+    <insert id="save" parameterType="com.luruoyang.entity.AddressBook" useGeneratedKeys="true"
+            keyProperty="id" keyColumn="id">
+        insert into address_book
+        VALUES (#{id},
+                #{useId},
+                #{consignee},
+                #{sex},
+                #{phone},
+                #{provinceCode},
+                #{provinceName},
+                #{cityCode},
+                #{cityName},
+                #{districtCode},
+                #{districtName},
+                #{detail},
+                #{label},
+                #{isDefault})
+    </insert>
+    <update id="updateById" parameterType="com.luruoyang.entity.AddressBook">
+        update address_book
+        <set>
+            <if test="userId !=null">
+                user_id = #{userId},
+            </if>
+            <if test="consignee !=null and consignee!=''">
+                consignee = #{consignee},
+            </if>
+            <if test="sex !=null and !='' ">
+                sex = #{sex},
+            </if>
+            <if test="phone !=null and !='' ">
+                phone = #{phone},
+            </if>
+            <if test="provinceCode !=null and !='' ">
+                province_code = #{provinceCode},
+            </if>
+            <if test="provinceName !=null and !='' ">
+                province_name = #{provinceName},
+            </if>
+            <if test="cityCode !=null and !='' ">
+                city_code = #{cityCode},
+            </if>
+            <if test="cityName !=null and !='' ">
+                city_name = #{cityName},
+            </if>
+            <if test="districtCode !=null and !='' ">
+                district_code = #{districtCode},
+            </if>
+            <if test=" districtName !=null and !='' ">
+                district_name = #{districtName},
+            </if>
+            <if test="detail !=null and !='' ">
+                detail = #{detail},
+            </if>
+            <if test="label !=null and !='' ">
+                label = #{label},
+            </if>
+            <if test="isDefault !=null">
+                is_default = #{isDefault}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete
+        from address_book
+        where id = #{id}
+    </delete>
+    <sql id="baseAddressMap">
+        user_id userId,
+        city_name cityName,
+        city_code cityCode,
+        province_name provinceName,
+        province_code provinceCode,
+        district_code districtCode,
+        district_name districtName,
+        is_default isDefault
+    </sql>
+    <select id="findAllByUserId" resultType="com.luruoyang.entity.AddressBook" parameterType="java.lang.Long">
+        select id,
+        consignee,
+        sex,
+        phone,
+        detail,
+        label,
+        <include refid="baseAddressMap"/>
+        from address_book
+        <where>
+            <if test="user_id!=null">
+                user_id = #{userId}
+            </if>
+            <if test="is_default != null">
+                is_default = #{isDefault}
+            </if>
+        </where>
+
+    </select>
+    <select id="findById" resultType="com.luruoyang.entity.AddressBook" parameterType="java.lang.Long">
+        select id,
+        consignee,
+        sex,
+        phone,
+        detail,
+        label,
+        <include refid="baseAddressMap"/>
+        from address_book
+        where id = #{id}
+    </select>
+
+</mapper>

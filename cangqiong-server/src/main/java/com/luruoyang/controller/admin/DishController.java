@@ -69,7 +69,7 @@ public class DishController {
   }
 
   @PutMapping
-  @Operation(summary = "根据DishID查询")
+  @Operation(summary = "根据ID更新")
   public Result updateById(@RequestBody DishDTO dishDTO) {
     if (dishService.updateById(dishDTO)) {
       return Result.success();
@@ -81,7 +81,7 @@ public class DishController {
   @GetMapping("/list")
   @Operation(summary = "根据ID查询所有菜品")
   public Result findByCategoryId(@RequestParam("categoryId") Long categoryId) {
-    List<Dish> result = dishService.findByCategoryId(categoryId);
+    List<DishVo> result = dishService.findByCategoryId(categoryId);
 
     return Result.success(result);
 

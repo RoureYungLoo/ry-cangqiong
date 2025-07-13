@@ -1,6 +1,7 @@
 package com.luruoyang.service.admin;
 
 import com.luruoyang.dto.SetmealDto;
+import com.luruoyang.entity.Setmeal;
 import com.luruoyang.utils.PageResult;
 import com.luruoyang.vo.SetmealVo;
 
@@ -18,4 +19,6 @@ public interface SetmealService {
   boolean updateById(SetmealDto setmealDto);
 
   boolean updateStatusById(SetmealDto setmealDto);
+
+  List<Setmeal> findByCategoryId(Long categoryId);
 }

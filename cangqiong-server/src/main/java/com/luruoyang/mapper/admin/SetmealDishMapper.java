@@ -1,6 +1,7 @@
 package com.luruoyang.mapper.admin;
 
 import com.luruoyang.entity.SetmealDish;
+import com.luruoyang.vo.DishItemVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -11,4 +12,6 @@ public interface SetmealDishMapper {
   int deleteSetmealDishBySetmealId(List<Long> setmealIds);
 
   Long findSetmealCountByDishId(List<Long> ids);
+
+  List<DishItemVo> findDishBySetmealId(Long setmealId);
 }

@@ -113,7 +113,7 @@ public class CategoryServiceImpl implements CategoryService {
   }
 
   @Override
-  public List<Category> list(Integer type) {
+  public List<Category> list(Integer type, Integer status) {
     List<Category> categoryList;
     String key = RedisKey.CATEGORY_LIST + type;
     /* 添加缓存*/
@@ -122,8 +122,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     if (categoryList == null || categoryList.isEmpty()) {
       log.warn("菜品分类 未命中缓存");
-      categoryList = categoryMapper.list(type);
-      redis.set(key, categoryList,30, TimeUnit.MINUTES);
+      categoryList = categoryMapper.list(type, status);
+      redis.set(key, categoryList, 30, TimeUnit.MINUTES);
     } else {
       log.warn("菜品分类 命中缓存");
     }

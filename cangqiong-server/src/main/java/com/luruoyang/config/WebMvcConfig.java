@@ -1,6 +1,7 @@
 package com.luruoyang.config;
 
-import com.luruoyang.interceptor.LoginInterceptor;
+import com.luruoyang.interceptor.AdminLoginInterceptor;
+import com.luruoyang.interceptor.UserLoginInterceptor;
 import com.luruoyang.json.JacksonObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,12 +18,17 @@ import java.util.List;
 public class WebMvcConfig implements WebMvcConfigurer {
 
   @Autowired
-  private LoginInterceptor loginInterceptor;
+  private AdminLoginInterceptor adminLoginInterceptor;
+
+  @Autowired
+  private UserLoginInterceptor userLoginInterceptor;
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
     String[] excludePatterns = new String[]{
         "/admin/employee/login",
+        "/user/user/login",
+        "/user/shop/status",
         "/webjars/**",
         "/v3/api-docs/**",
         "/swagger-resources/**",
@@ -32,8 +38,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
         "/api-docs",
         "/api-docs/**",
         "/doc.html/**"};
-    registry.addInterceptor(loginInterceptor)
-        .addPathPatterns("/**")
+    registry.addInterceptor(adminLoginInterceptor)
+        .addPathPatterns("/admin/**")
+        .excludePathPatterns(excludePatterns);
+
+    registry.addInterceptor(userLoginInterceptor)
+        .addPathPatterns("/user/**")
         .excludePathPatterns(excludePatterns);
   }
 

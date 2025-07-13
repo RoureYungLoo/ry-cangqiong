@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luruoyang.mapper.user.UserMapper">
+    <insert id="save" parameterType="com.luruoyang.entity.User" useGeneratedKeys="true"
+            keyProperty="id" keyColumn="id">
+        insert into user(id, openid, name, phone, sex, id_number, avatar, create_time)
+        values (#{id},
+                #{openid},
+                #{name},
+                #{phone},
+                #{sex},
+                #{idNumber},
+                #{avatar},
+                #{createTime})
+    </insert>
+    <update id="updateUserById" parameterType="com.luruoyang.entity.User">
+        update user
+        <set>
+            <if test="openid !=null and openid !='' ">
+                openid = #{openid}
+            </if>
+            <if test="name !=null and name !='' ">
+                name = #{name}
+            </if>
+            <if test="phone !=null and phone !='' ">
+                phone = #{phone}
+            </if>
+            <if test="sex !=null and sex !='' ">
+                sex = #{sex}
+            </if>
+            <if test="idNumber !=null and id_number !='' ">
+                id_number = #{idNumber}
+            </if>
+            <if test="avatar !=null and avatar !='' ">
+                avatar = #{avatar}
+            </if>
+            <if test="createTime !=null">
+                create_time = #{createTime}
+            </if>
+        </set>
+
+        <where>
+            id = #{id}
+        </where>
+
+    </update>
+    <delete id="deleteUserById" parameterType="com.luruoyang.entity.User">
+        delete
+        from user
+        where id = #{id};
+    </delete>
+    <select id="findById" resultType="com.luruoyang.entity.User">
+        select id,
+               openid,
+               name,
+               phone,
+               sex,
+               id_number   idNumber,
+               avatar,
+               create_time createTime
+        from user
+        where id = #{id}
+    </select>
+    <select id="findByOpenId" resultType="com.luruoyang.entity.User" parameterType="java.lang.String">
+        select id,
+               openid,
+               name,
+               phone,
+               sex,
+               id_number   idNumber,
+               avatar,
+               create_time createTime
+        from user
+        where openid = #{openId}
+    </select>
+</mapper>

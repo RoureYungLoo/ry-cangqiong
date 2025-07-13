@@ -3,6 +3,7 @@ package com.luruoyang.utils;
 import com.luruoyang.context.ThreadLocalContext;
 import com.luruoyang.enums.EmpError;
 import com.luruoyang.exception.BusinessException;
+import com.luruoyang.properties.JJwtProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -23,10 +24,10 @@ import java.util.Objects;
 @Component
 @Data
 public class JJwtUtils {
-  @Value("${jjwt.secret}")
-  private String secret;
-  @Value("${jjwt.expiration}")
-  private Long expiration;
+//  @Value("${jjwt.secret}")
+//  private String secret;
+//  @Value("${jjwt.expiration}")
+//  private Long expiration;
 
 /*  public String gen(Map<String, Object> claims) {
     Date expireAt = new Date(Instant.now().getEpochSecond() + expiration);
@@ -37,9 +38,19 @@ public class JJwtUtils {
         .compact();
   }*/
 
-  public String gen(Map<String, Object> claims) {
+  public String gen(Map<String, Object> claims, String secret, Long durationMills) {
+    if (claims.isEmpty()) {
+      log.error("no jwt claims");
+      throw new RuntimeException("no jwt claims");
+    }
+
+    if (secret == null || secret.isBlank() || secret.isEmpty()) {
+      log.error("no jwt secret");
+      throw new RuntimeException("no jwt secret");
+    }
+
     SecretKey secretKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
-    Date expireAt = new Date(Instant.now().toEpochMilli() + expiration);
+    Date expireAt = new Date(Instant.now().toEpochMilli() + durationMills);
     log.warn("---> jwt expireAt: {}", expireAt);
     return Jwts.builder()
         .header()
@@ -54,7 +65,7 @@ public class JJwtUtils {
         .compact();
   }
 
-  public Claims parse(String token) {
+  public Claims parse(String token, String secret) {
     SecretKey secretKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
 
     return Jwts.parser()
@@ -64,14 +75,15 @@ public class JJwtUtils {
         .getPayload();
   }
 
-  public boolean check(String token) {
+  public boolean check(String token, String secret) {
     if (Objects.isNull(token) || token.isBlank()) {
+      log.error(" loggin without token: {}", token);
       return false;
     }
 
     Claims claims = null;
     try {
-      claims = parse(token);
+      claims = parse(token, secret);
       log.info("parsed claims: {}", claims);
       /* 设置ThreadLocal */
       Object currentUser = claims.get("id");

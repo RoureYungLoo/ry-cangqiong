@@ -5,6 +5,7 @@ import com.luruoyang.dto.CategoryDto;
 import com.luruoyang.entity.Category;
 import com.luruoyang.enums.OpType;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,5 +23,5 @@ public interface CategoryMapper {
   @AutoFill(OpType.UPDATE)
   int updateById(Category category);
 
-  List<Category> list(Integer type);
+  List<Category> list(@Param("type") Integer type, @Param("status") Integer status);
 }

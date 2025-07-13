@@ -1,0 +1,9 @@
+server:
+  port: 8899
+
+baidu:
+  weather:
+    key: ${BAIDU_KEY}
+gaode:
+  map:
+    key: ${GAODE_KEY}

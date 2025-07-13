@@ -138,4 +138,10 @@ public class SetmealServiceImpl implements SetmealService {
 
     return row > 0;
   }
+
+  @Override
+  public List<Setmeal> findByCategoryId(Long categoryId) {
+    List<Setmeal> setmealList =  setmealMapper.findByCategroyId(categoryId);
+    return setmealList;
+  }
 }

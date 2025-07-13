@@ -17,7 +17,7 @@ public interface CategoryService {
 
   boolean updateStatusById(Long id, Integer status);
 
-  List<Category> list(Integer type);
+  List<Category> list(Integer type, Integer status);
 
   Category findById(Long categoryId);
 }

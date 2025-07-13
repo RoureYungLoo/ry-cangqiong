@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luruoyang.mapper.MerchantMapper">
+    <sql id="baseSql">
+        select id ,
+        merchant_no merchantNno,
+        shop_name shopName,
+        shop_telephone shopTelephone,
+        shop_address shopAddress,
+        delivery_time deliveryTime,
+        merchant_evaluation merchantEvaluation,
+        merchant_food_safety_archives merchantFoodSafetyArchives,
+        merchant_provides_delivery_fees merchantProvidesDeliveryFees
+        from merchant
+    </sql>
+    <insert id="save" parameterType="com.luruoyang.entity.Merchant" useGeneratedKeys="true" keyColumn="id"
+            keyProperty="id">
+        insert into merchant
+        values (#{id},
+                #{merchantNno},
+                #{shopName},
+                #{shopTelephone},
+                #{shopAddress},
+                #{deliveryTime},
+                #{merchantEvaluation},
+                #{merchantFoodSafetyArchives},
+                #{merchantProvidesDeliveryFees})
+    </insert>
+    <update id="updateById" parameterType="com.luruoyang.entity.Merchant">
+        update merchant
+        <set>
+            <if test="merchantNno != null and merchantNno != ''">
+                merchant_no = #{merchantNno}
+            </if>
+            <if test="shopName != null and shopName != ''">
+                shop_name = #{shopName}
+            </if>
+            <if test="shopTelephone != null and shopTelephone != ''">
+                shop_telephone = #{shopTelephone}
+            </if>
+            <if test="shopAddress != null and shopAddress != ''">
+                shop_address = #{shopAddress}
+            </if>
+            <if test="deliveryTime != null and deliveryTime != ''">
+                delivery_time = #{deliveryTime}
+            </if>
+            <if test="merchantEvaluation != null and merchantEvaluation != ''">
+                merchant_evaluation = #{merchantEvaluation}
+            </if>
+            <if test="merchantFoodSafetyArchives != null and merchantFoodSafetyArchives != ''">
+                merchant_food_safety_archives = #{merchantFoodSafetyArchives}
+            </if>
+            <if test="merchantProvidesDeliveryFees != null and merchantProvidesDeliveryFees != ''">
+                merchant_provides_delivery_fees = #{merchantProvidesDeliveryFees}
+            </if>
+        </set>
+        where id = #{id}
+
+    </update>
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete
+        from merchant
+        where id = #{merchantNo}
+
+    </delete>
+    <select id="findById" resultType="com.luruoyang.entity.Merchant">
+        <include refid="baseSql"/>
+        where id = #{merchantNo}
+    </select>
+    <select id="findByIds" resultType="com.luruoyang.entity.Merchant"
+            parameterType="java.lang.Long">
+        <include refid="baseSql"/>
+        <where>
+            <foreach collection="list" open="in IN (" separator="," close=")" item="merchantNo">
+                #{merchantNo}
+            </foreach>
+        </where>
+    </select>
+</mapper>

@@ -31,5 +31,5 @@ public interface DishMapper {
 
   Long findCount(@Param("ids") List<Long> ids, @Param("status") int status);
 
-  List<Dish> findByCategoryId(@Param("dish") Dish dish);
+  List<DishVo> findByCategoryId(@Param("dish") Dish dish);
 }

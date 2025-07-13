@@ -1,6 +1,8 @@
 package com.luruoyang.controller.user;
 
 import com.luruoyang.constant.RedisKey;
+import com.luruoyang.entity.Merchant;
+import com.luruoyang.service.MerchantService;
 import com.luruoyang.utils.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,6 +22,8 @@ public class ShopController2 {
 
   @Autowired
   private RedisTemplate<Object, Object> redisTemplate;
+  @Autowired
+  private MerchantService merchantService;
 
 
   @Operation(summary = "获取店铺营业状态")
@@ -31,6 +35,13 @@ public class ShopController2 {
       log.warn("获取店铺营业状态失败, {}", o);
       return Result.fail();
     }
-    return Result.success(o.toString());
+    return Result.success(Integer.parseInt(o.toString()));
+  }
+
+  @Operation(summary = "获取店铺信息")
+  @GetMapping("/shop/getMerchantInfo")
+  public Result getMerchantInfo() {
+    Merchant merchant = merchantService.findById(1L);
+    return Result.success(merchant);
   }
 }

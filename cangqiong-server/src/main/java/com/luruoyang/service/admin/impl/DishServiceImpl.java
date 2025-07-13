@@ -131,11 +131,11 @@ public class DishServiceImpl implements DishService {
   }
 
   @Override
-  public List<Dish> findByCategoryId(Long categoryId) {
+  public List<DishVo> findByCategoryId(Long categoryId) {
     Dish dish = new Dish();
     dish.setCategoryId(categoryId);
     dish.setStatus(1);
-    List<Dish> dishVoList = dishMapper.findByCategoryId(dish);
+    List<DishVo> dishVoList = dishMapper.findByCategoryId(dish);
 
     return dishVoList;
 

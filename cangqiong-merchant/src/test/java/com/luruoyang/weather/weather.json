@@ -1,0 +1,393 @@
+{
+  "status": 0,
+  "result": {
+    "location": {
+      "country": "中国",
+      "province": "北京市",
+      "city": "北京市",
+      "name": "朝阳",
+      "id": "110105"
+    },
+    "now": {
+      "text": "多云",
+      "temp": 31,
+      "feels_like": 32,
+      "rh": 48,
+      "wind_class": "2级",
+      "wind_dir": "西南风",
+      "prec_1h": 0.0,
+      "clouds": 82,
+      "vis": 30000,
+      "aqi": 53,
+      "pm25": 18,
+      "pm10": 55,
+      "no2": 13,
+      "so2": 11,
+      "o3": 153,
+      "co": 0.5,
+      "uptime": "20250707194500"
+    },
+    "indexes": [
+      {
+        "name": "晨练指数",
+        "brief": "不宜",
+        "detail": "有降水，建议在室内做适当锻炼。"
+      },
+      {
+        "name": "洗车指数",
+        "brief": "不适宜",
+        "detail": "两天内有雨，雨水和泥水会弄脏爱车。"
+      },
+      {
+        "name": "感冒指数",
+        "brief": "少发",
+        "detail": "感冒机率较低，避免长期处于空调屋中。"
+      },
+      {
+        "name": "紫外线指数",
+        "brief": "中等",
+        "detail": "涂擦SPF大于15、PA+防晒护肤品。"
+      },
+      {
+        "name": "穿衣指数",
+        "brief": "热",
+        "detail": "适合穿T恤、短薄外套等夏季服装。"
+      },
+      {
+        "name": "运动指数",
+        "brief": "较不宜",
+        "detail": "有降水，推荐您在室内进行休闲运动。"
+      }
+    ],
+    "alerts": [],
+    "forecasts": [
+      {
+        "text_day": "多云",
+        "text_night": "中雨",
+        "high": 33,
+        "low": 24,
+        "wc_day": "3~4级",
+        "wd_day": "东风",
+        "wc_night": "<3级",
+        "wd_night": "东风",
+        "date": "2025-07-07",
+        "week": "星期一"
+      },
+      {
+        "text_day": "雷阵雨",
+        "text_night": "雷阵雨",
+        "high": 31,
+        "low": 24,
+        "wc_day": "<3级",
+        "wd_day": "东风",
+        "wc_night": "<3级",
+        "wd_night": "东北风",
+        "date": "2025-07-08",
+        "week": "星期二"
+      },
+      {
+        "text_day": "雷阵雨",
+        "text_night": "雷阵雨",
+        "high": 32,
+        "low": 24,
+        "wc_day": "<3级",
+        "wd_day": "东风",
+        "wc_night": "<3级",
+        "wd_night": "西北风",
+        "date": "2025-07-09",
+        "week": "星期三"
+      },
+      {
+        "text_day": "雷阵雨",
+        "text_night": "多云",
+        "high": 32,
+        "low": 24,
+        "wc_day": "<3级",
+        "wd_day": "南风",
+        "wc_night": "<3级",
+        "wd_night": "东南风",
+        "date": "2025-07-10",
+        "week": "星期四"
+      },
+      {
+        "text_day": "多云",
+        "text_night": "多云",
+        "high": 33,
+        "low": 25,
+        "wc_day": "<3级",
+        "wd_day": "南风",
+        "wc_night": "<3级",
+        "wd_night": "东北风",
+        "date": "2025-07-11",
+        "week": "星期五"
+      },
+      {
+        "text_day": "多云",
+        "text_night": "多云",
+        "high": 34,
+        "low": 25,
+        "wc_day": "<3级",
+        "wd_day": "西南风",
+        "wc_night": "<3级",
+        "wd_night": "西北风",
+        "date": "2025-07-12",
+        "week": "星期六"
+      },
+      {
+        "text_day": "雷阵雨",
+        "text_night": "阴",
+        "high": 35,
+        "low": 26,
+        "wc_day": "<3级",
+        "wd_day": "南风",
+        "wc_night": "<3级",
+        "wd_night": "南风",
+        "date": "2025-07-13",
+        "week": "星期日"
+      }
+    ],
+    "forecast_hours": [
+      {
+        "text": "晴",
+        "temp_fc": 31,
+        "wind_class": "3~4级",
+        "wind_dir": "东南风",
+        "rh": 59,
+        "prec_1h": 0.0,
+        "clouds": 10,
+        "data_time": "2025-07-07 19:00:00"
+      },
+      {
+        "text": "晴",
+        "temp_fc": 31,
+        "wind_class": "3~4级",
+        "wind_dir": "东南风",
+        "rh": 59,
+        "prec_1h": 0.0,
+        "clouds": 10,
+        "data_time": "2025-07-07 20:00:00"
+      },
+      {
+        "text": "晴",
+        "temp_fc": 28,
+        "wind_class": "<3级",
+        "wind_dir": "东南风",
+        "rh": 67,
+        "prec_1h": 0.0,
+        "clouds": 36,
+        "data_time": "2025-07-07 21:00:00"
+      },
+      {
+        "text": "小雨",
+        "temp_fc": 26,
+        "wind_class": "<3级",
+        "wind_dir": "东南风",
+        "rh": 74,
+        "prec_1h": 0.2,
+        "clouds": 62,
+        "data_time": "2025-07-07 22:00:00"
+      },
+      {
+        "text": "小雨",
+        "temp_fc": 24,
+        "wind_class": "<3级",
+        "wind_dir": "东风",
+        "rh": 83,
+        "prec_1h": 0.4,
+        "clouds": 87,
+        "data_time": "2025-07-07 23:00:00"
+      },
+      {
+        "text": "小雨",
+        "temp_fc": 24,
+        "wind_class": "<3级",
+        "wind_dir": "东风",
+        "rh": 83,
+        "prec_1h": 0.4,
+        "clouds": 88,
+        "data_time": "2025-07-08 00:00:00"
+      },
+      {
+        "text": "小雨",
+        "temp_fc": 24,
+        "wind_class": "<3级",
+        "wind_dir": "东风",
+        "rh": 84,
+        "prec_1h": 0.3,
+        "clouds": 89,
+        "data_time": "2025-07-08 01:00:00"
+      },
+      {
+        "text": "小雨",
+        "temp_fc": 24,
+        "wind_class": "3~4级",
+        "wind_dir": "东风",
+        "rh": 85,
+        "prec_1h": 0.3,
+        "clouds": 90,
+        "data_time": "2025-07-08 02:00:00"
+      },
+      {
+        "text": "小雨",
+        "temp_fc": 24,
+        "wind_class": "3~4级",
+        "wind_dir": "东风",
+        "rh": 85,
+        "prec_1h": 0.2,
+        "clouds": 82,
+        "data_time": "2025-07-08 03:00:00"
+      },
+      {
+        "text": "多云",
+        "temp_fc": 24,
+        "wind_class": "3~4级",
+        "wind_dir": "东北风",
+        "rh": 86,
+        "prec_1h": 0.0,
+        "clouds": 74,
+        "data_time": "2025-07-08 04:00:00"
+      },
+      {
+        "text": "多云",
+        "temp_fc": 24,
+        "wind_class": "3~4级",
+        "wind_dir": "东北风",
+        "rh": 87,
+        "prec_1h": 0.0,
+        "clouds": 68,
+        "data_time": "2025-07-08 05:00:00"
+      },
+      {
+        "text": "多云",
+        "temp_fc": 24,
+        "wind_class": "3~4级",
+        "wind_dir": "东北风",
+        "rh": 87,
+        "prec_1h": 0.0,
+        "clouds": 76,
+        "data_time": "2025-07-08 06:00:00"
+      },
+      {
+        "text": "小雨",
+        "temp_fc": 24,
+        "wind_class": "3~4级",
+        "wind_dir": "东北风",
+        "rh": 87,
+        "prec_1h": 0.5,
+        "clouds": 83,
+        "data_time": "2025-07-08 07:00:00"
+      },
+      {
+        "text": "小雨",
+        "temp_fc": 24,
+        "wind_class": "3~4级",
+        "wind_dir": "东北风",
+        "rh": 88,
+        "prec_1h": 0.7,
+        "clouds": 91,
+        "data_time": "2025-07-08 08:00:00"
+      },
+      {
+        "text": "小雨",
+        "temp_fc": 25,
+        "wind_class": "3~4级",
+        "wind_dir": "东北风",
+        "rh": 87,
+        "prec_1h": 0.5,
+        "clouds": 93,
+        "data_time": "2025-07-08 09:00:00"
+      },
+      {
+        "text": "雷阵雨",
+        "temp_fc": 26,
+        "wind_class": "3~4级",
+        "wind_dir": "东风",
+        "rh": 86,
+        "prec_1h": 0.2,
+        "clouds": 94,
+        "data_time": "2025-07-08 10:00:00"
+      },
+      {
+        "text": "阴",
+        "temp_fc": 28,
+        "wind_class": "3~4级",
+        "wind_dir": "东风",
+        "rh": 86,
+        "prec_1h": 0.0,
+        "clouds": 97,
+        "data_time": "2025-07-08 11:00:00"
+      },
+      {
+        "text": "阴",
+        "temp_fc": 28,
+        "wind_class": "3~4级",
+        "wind_dir": "东风",
+        "rh": 85,
+        "prec_1h": 0.0,
+        "clouds": 88,
+        "data_time": "2025-07-08 12:00:00"
+      },
+      {
+        "text": "多云",
+        "temp_fc": 29,
+        "wind_class": "<3级",
+        "wind_dir": "东风",
+        "rh": 85,
+        "prec_1h": 0.0,
+        "clouds": 80,
+        "data_time": "2025-07-08 13:00:00"
+      },
+      {
+        "text": "多云",
+        "temp_fc": 30,
+        "wind_class": "<3级",
+        "wind_dir": "东风",
+        "rh": 85,
+        "prec_1h": 0.0,
+        "clouds": 72,
+        "data_time": "2025-07-08 14:00:00"
+      },
+      {
+        "text": "多云",
+        "temp_fc": 30,
+        "wind_class": "<3级",
+        "wind_dir": "东南风",
+        "rh": 83,
+        "prec_1h": 0.0,
+        "clouds": 66,
+        "data_time": "2025-07-08 15:00:00"
+      },
+      {
+        "text": "多云",
+        "temp_fc": 30,
+        "wind_class": "3~4级",
+        "wind_dir": "东南风",
+        "rh": 82,
+        "prec_1h": 0.0,
+        "clouds": 61,
+        "data_time": "2025-07-08 16:00:00"
+      },
+      {
+        "text": "多云",
+        "temp_fc": 30,
+        "wind_class": "3~4级",
+        "wind_dir": "东南风",
+        "rh": 81,
+        "prec_1h": 0.0,
+        "clouds": 56,
+        "data_time": "2025-07-08 17:00:00"
+      },
+      {
+        "text": "多云",
+        "temp_fc": 29,
+        "wind_class": "3~4级",
+        "wind_dir": "东南风",
+        "rh": 80,
+        "prec_1h": 0.0,
+        "clouds": 65,
+        "data_time": "2025-07-08 18:00:00"
+      }
+    ]
+  },
+  "message": "success"
+}

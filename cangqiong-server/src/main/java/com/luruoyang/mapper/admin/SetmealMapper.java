@@ -26,4 +26,6 @@ public interface SetmealMapper {
 
   /* 根据SetmealID查询在售/停售的菜品数量 */
   int findCountByDishStatus(@Param("setmealId") Long setmealId,@Param("dishStatus") Integer dishStatus);
+
+  List<Setmeal> findByCategroyId(Long categoryId);
 }

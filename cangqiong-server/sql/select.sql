@@ -55,4 +55,27 @@ select *
 from setmeal s
          left join setmeal_dish sd on s.id = sd.setmeal_id
          left join dish d on sd.dish_id = d.id
-where s.id = 3 and  d.status = 0;
+where s.id = 3
+  and d.status = 0;
+
+select id,
+       name,
+       price,
+       status,
+       description,
+       image,
+       s.category_id as categoryId,
+       s.create_time as createTime,
+       s.update_time as updateTime,
+       s.create_user as createUser,
+       s.update_user as updateUser,
+       s.make_time   as makeTime
+from setmeal
+where category_id = 23;
+
+select d.*, c.name categoryName, df.id dfId, df.name dfName, df.value dfValue, df.dish_id dfDishID
+from dish d
+         left join category c on d.category_id = c.id
+         left join dish_flavor df on d.id = df.dish_id
+where category_id = 11
+  and d.status = 1

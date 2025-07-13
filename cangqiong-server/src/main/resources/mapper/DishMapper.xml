@@ -104,16 +104,40 @@
             </foreach>
         </where>
     </select>
-    <select id="findByCategoryId" resultType="com.luruoyang.entity.Dish" parameterType="com.luruoyang.entity.Dish">
-        select id,
-        name,
-        price,
-        image,
-        description,
-        status,
-        <include refid="baseSql"/>
-        from dish
+
+    <resultMap id="disVoMap" type="com.luruoyang.vo.DishVo">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="price" column="price"/>
+        <result property="image" column="image"/>
+        <result property="description" column="description"/>
+        <result property="status" column="status"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createUser" column="create_user"/>
+        <result property="updateUser" column="update_user"/>
+        <result property="makeTime" column="make_time"/>
+        <result property="categoryName" column="category_name"/>
+        <collection property="flavors" column="id" ofType="com.luruoyang.entity.DishFlavor">
+            <id property="id" column="dfId"/>
+            <result property="dishId" column="dfDishID"/>
+            <result property="name" column="dfName"/>
+            <result property="value" column="dfValue"/>
+        </collection>
+
+
+    </resultMap>
+    <select id="findByCategoryId" resultMap="disVoMap" parameterType="com.luruoyang.entity.Dish">
+        select d.*,
+               c.name     categoryName,
+               df.id      dfId,
+               df.name    dfName,
+               df.value   dfValue,
+               df.dish_id dfDishID
+        from dish d
+                 left join category c on d.category_id = c.id
+                 left join dish_flavor df on d.id = df.dish_id
         where category_id = #{dish.categoryId}
-        and status = #{dish.status}
+          and d.status = #{dish.status}
     </select>
 </mapper>

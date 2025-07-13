@@ -70,7 +70,7 @@ public class CategoryController {
 
   @GetMapping("/list")
   public Result list(@RequestParam("type") Integer type) {
-    List<Category> categoryList = categoryService.list(type);
+    List<Category> categoryList = categoryService.list(type,null);
     return Result.success(categoryList);
   }
 

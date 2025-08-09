@@ -129,15 +129,21 @@
     </resultMap>
     <select id="findByCategoryId" resultMap="disVoMap" parameterType="com.luruoyang.entity.Dish">
         select d.*,
-               c.name     categoryName,
-               df.id      dfId,
-               df.name    dfName,
-               df.value   dfValue,
-               df.dish_id dfDishID
+        c.name categoryName,
+        df.id dfId,
+        df.name dfName,
+        df.value dfValue,
+        df.dish_id dfDishID
         from dish d
-                 left join category c on d.category_id = c.id
-                 left join dish_flavor df on d.id = df.dish_id
-        where category_id = #{dish.categoryId}
-          and d.status = #{dish.status}
+        left join category c on d.category_id = c.id
+        left join dish_flavor df on d.id = df.dish_id
+        <where>
+            <if test="dish.categoryId != null">
+                and category_id = #{dish.categoryId}
+            </if>
+            <if test="dish.status != null">
+                and d.status = #{dish.status}
+            </if>
+        </where>
     </select>
 </mapper>

@@ -42,7 +42,7 @@ public class DishController {
   }
 
   @PostMapping("/status/{status}")
-  @Operation(summary = "更新菜品status")
+  @Operation(summary = "起售/停售菜品")
   public Result updateStatus(@RequestParam("id") Long id, @PathVariable("status") Integer status) {
     if (dishService.updateStatusById(id, status)) {
       return Result.success();
@@ -79,11 +79,9 @@ public class DishController {
   }
 
   @GetMapping("/list")
-  @Operation(summary = "根据ID查询所有菜品")
+  @Operation(summary = "根据分类ID查询所有菜品")
   public Result findByCategoryId(@RequestParam("categoryId") Long categoryId) {
     List<DishVo> result = dishService.findByCategoryId(categoryId);
-
     return Result.success(result);
-
   }
 }

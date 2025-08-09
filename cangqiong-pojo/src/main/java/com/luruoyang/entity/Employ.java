@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
 @Schema(description = "员工实体类")
-public class Employ {
+public class Employ implements Serializable {
+  private static final long serialVersionUID = 1L;
   @Schema(description = "主键,自增")
   private Long id;
   @Schema(description = "姓名")

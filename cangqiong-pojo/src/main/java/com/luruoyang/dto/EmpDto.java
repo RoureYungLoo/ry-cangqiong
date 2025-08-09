@@ -4,9 +4,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Data
 @Schema(description = "新增员工dto")
-public class EmpDto {
+public class EmpDto implements Serializable {
+  @Serial
+  private static final long serialVersionUID = 1L;
   @NotNull
   @Schema(description = "员工id", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   private Long id;

@@ -11,7 +11,11 @@ public interface UserMapper {
 
   int deleteUserById(User user);
 
+  int deleteByUserId(Long userId);
+
   User findById(Long userId);
 
   User findByOpenId(String openid);
+
+  int deleteAll();
 }

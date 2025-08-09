@@ -1,4 +1,7 @@
 package com.luruoyang.entity;
 
-public class MerchantDto extends Merchant {
+import java.io.Serializable;
+
+public class MerchantDto extends Merchant implements Serializable {
+  private static final long serialVersionUID = 1L;
 }

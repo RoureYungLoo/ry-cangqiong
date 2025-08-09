@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * @author luruoyang
+ */
 @Slf4j
 @RestController
 @RequestMapping("/admin")
@@ -23,7 +26,7 @@ public class ShopController {
   @Operation(summary = "更新店铺状态")
   @PutMapping("/shop/{status}")
   public Result updateShopStatus(@PathVariable("status") Integer status) {
-    redisTemplate.opsForValue().set(RedisKey.SHOP_STATUS, status);
+    redisTemplate.opsForValue().set(RedisKey.SHOP_STATUS, String.valueOf(status));
     return Result.success();
   }
 

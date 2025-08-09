@@ -2,8 +2,13 @@ package com.luruoyang.dto.user;
 
 import lombok.Data;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Data
-public class WechatAuthDto {
+public class WechatAuthDto implements Serializable {
+  @Serial
+  private static final long serialVersionUID = 1L;
   private String appid;
   private String secret;
   private String js_code;

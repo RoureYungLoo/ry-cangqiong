@@ -51,6 +51,16 @@
         from user
         where id = #{id};
     </delete>
+    <delete id="deleteAll">
+        delete
+        from user
+        where id > 0
+    </delete>
+    <delete id="deleteByUserId">
+        delete
+        from user
+        where id = #{id}
+    </delete>
     <select id="findById" resultType="com.luruoyang.entity.User">
         select id,
                openid,

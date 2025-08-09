@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luruoyang.mapper.user.ShoppingCartMapper">
+
+    <insert id="save">
+        insert into shopping_cart
+        values (#{id},
+                #{name},
+                #{image},
+                #{userId},
+                #{dishId},
+                #{setmealId},
+                #{dishFlavor},
+                #{number},
+                #{amount},
+                #{createTime})
+    </insert>
+    <update id="updateById">
+        update shopping_cart
+        <set>
+            <if test="name!=null and name != ''">
+                name = #{name},
+            </if>
+            <if test="image!=null  and image != ''">
+                image = #{image},
+            </if>
+            <if test="userId!=null">
+                user_id = #{userId},
+            </if>
+            <if test="dishId!=null">
+                dish_id = #{dishId},
+            </if>
+            <if test=" setmealId!=null">
+                setmeal_id = #{setmealId},
+            </if>
+            <if test=" dishFlavor!=null  and dishFlavor != ''">
+                dish_flavor = #{dishFlavor},
+            </if>
+            <if test="number!=null">
+                number = #{number},
+            </if>
+            <if test="amount!=null">
+                amount = #{amount},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="deleteById">
+        delete
+        from shopping_cart
+        where id = #{id}
+    </delete>
+    <delete id="deleteByIds">
+        delete from shopping_cart
+        where
+        <foreach collection="array" open="id IN(" separator="," close=")" item="id">
+            #{id}
+        </foreach>
+    </delete>
+    <delete id="deleteByUserIds">
+        delete from shopping_cart
+        where
+        <foreach collection="array" open="user_id IN(" separator="," close=")" item="userId">
+            #{userId}
+        </foreach>
+    </delete>
+    <select id="findById" resultType="com.luruoyang.entity.ShoppingCart">
+        select id,
+               name,
+               image,
+               user_id,
+               dish_id,
+               setmeal_id,
+               dish_flavor,
+               number,
+               amount,
+               create_time
+        from shopping_cart
+        where id = #{id}
+    </select>
+    <select id="list" resultType="com.luruoyang.entity.ShoppingCart">
+        select id, name, image, user_id, dish_id, setmeal_id, dish_flavor, number, amount, create_time from
+        shopping_cart
+        <where>
+            <if test="name!=null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="image!=null  and image != ''">
+                and image = #{image}
+            </if>
+            <if test="userId!=null">
+                and user_id = #{userId}
+            </if>
+            <if test="dishId!=null">
+                and dish_id = #{dishId}
+            </if>
+            <if test=" setmealId!=null">
+                and setmeal_id = #{setmealId}
+            </if>
+            <if test=" dishFlavor!=null  and dishFlavor != ''">
+                and dish_flavor = #{dishFlavor}
+            </if>
+            <if test="number!=null">
+                and number = #{number}
+            </if>
+            <if test="amount!=null">
+                and amount = #{amount}
+            </if>
+        </where>
+
+    </select>
+    <select id="findOne" resultType="com.luruoyang.entity.ShoppingCart">
+        select id, name, image, user_id, dish_id, setmeal_id, dish_flavor, number, amount, create_time from
+        shopping_cart
+        <where>
+            <if test="name!=null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="image!=null  and image != ''">
+                and image = #{image}
+            </if>
+            <if test="userId!=null">
+                and user_id = #{userId}
+            </if>
+            <if test="dishId!=null">
+                and dish_id = #{dishId}
+            </if>
+            <if test=" setmealId!=null">
+                and setmeal_id = #{setmealId}
+            </if>
+            <if test=" dishFlavor!=null  and dishFlavor != ''">
+                and dish_flavor = #{dishFlavor}
+            </if>
+            <if test="number!=null">
+                and number = #{number}
+            </if>
+            <if test="amount!=null">
+                and amount = #{amount}
+            </if>
+        </where>
+    </select>
+
+</mapper>

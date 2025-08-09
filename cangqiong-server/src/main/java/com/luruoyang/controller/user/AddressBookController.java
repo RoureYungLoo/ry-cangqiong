@@ -1,5 +1,6 @@
 package com.luruoyang.controller.user;
 
+import com.luruoyang.dto.AddressBookDto;
 import com.luruoyang.dto.user.AddrDto;
 import com.luruoyang.entity.AddressBook;
 import com.luruoyang.service.user.AddressBookService;
@@ -45,15 +46,15 @@ public class AddressBookController {
 
   @PutMapping
   @Operation(summary = "根据ID修改地址")
-  public Result updateById(@RequestBody AddressBook addressBook) {
-    if (addressBookService.updateById(addressBook)) {
+  public Result updateById(@RequestBody AddressBookDto dto) {
+    if (addressBookService.updateById(dto)) {
       return Result.success();
     } else {
       return Result.fail();
     }
   }
 
-  @DeleteMapping
+  @DeleteMapping("/")
   @Operation(summary = "根据ID删除地址")
   public Result deleteById(Long id) {
     if (addressBookService.deleteById(id)) {
@@ -64,7 +65,7 @@ public class AddressBookController {
   }
 
   @GetMapping("/{id}")
-  @Operation(summary = "根据ID删除地址")
+  @Operation(summary = "根据ID查询地址")
   public Result findById(@PathVariable Long id) {
     AddressBook addressBook = addressBookService.findById(id);
     return Result.success(addressBook);
@@ -72,8 +73,8 @@ public class AddressBookController {
 
   @PutMapping("/default")
   @Operation(summary = "设置默认地址")
-  public Result updateAddrStatus(@RequestBody AddrDto addrDto) {
-    if (addressBookService.updateAddrStatus(addrDto)) {
+  public Result updateAddrStatus(@RequestBody AddressBookDto dto) {
+    if (addressBookService.updateAddrStatus(dto)) {
       return Result.success();
     } else {
       return Result.fail();

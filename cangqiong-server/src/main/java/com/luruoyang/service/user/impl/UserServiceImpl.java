@@ -1,6 +1,8 @@
 package com.luruoyang.service.user.impl;
 
-import com.alibaba.fastjson.JSONObject;
+import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.ObjectUtil;
+import com.alibaba.fastjson2.JSONObject;
 import com.luruoyang.dto.user.LoginDto;
 import com.luruoyang.dto.user.WechatAuthDto;
 import com.luruoyang.entity.Merchant;
@@ -13,6 +15,7 @@ import com.luruoyang.service.user.UserService;
 import com.luruoyang.utils.JJwtUtils;
 import com.luruoyang.utils.MapUtils;
 import com.luruoyang.vo.LoginUserVo;
+import io.jsonwebtoken.lang.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.StatusLine;
@@ -26,6 +29,9 @@ import org.apache.http.util.EntityUtils;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.aspectj.apache.bcel.classfile.annotation.NameValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -96,6 +102,61 @@ public class UserServiceImpl implements UserService {
 
     loginUserVo.setMerchant(merchant);
     return loginUserVo;
+  }
+
+  /**
+   * save user info
+   *
+   * @param user user
+   * @return user saved
+   */
+  @Override
+  @CachePut(value = "userCache", key = "#result.id")
+  public User save(User user) {
+    userMapper.save(user);
+    log.info("save user {}", user);
+    return user;
+  }
+
+  /**
+   * get user info by userId
+   *
+   * @param userId userId
+   * @return user
+   */
+  @Override
+  @Cacheable(cacheNames = "userCache", key = "#userId", condition = "#userId != null")
+  public User getById(Long userId) {
+    User user = userMapper.findById(userId);
+    if (ObjectUtil.isNull(user)) {
+      throw new RuntimeException("用户不存在");
+    }
+    return user;
+  }
+
+  /**
+   * delete user by userId
+   *
+   * @param userId userId
+   * @return true or false
+   */
+  @Override
+  @CacheEvict(cacheNames = "userCache", key = "#userId")
+  public boolean deleteById(Long userId) {
+    int deleted = userMapper.deleteByUserId(userId);
+    return deleted > 0;
+  }
+
+  /**
+   * delte all users
+   *
+   * @return true of false
+   */
+  @Override
+  @CacheEvict(cacheNames = "userCache", allEntries = true)
+  public boolean deleteAll() {
+    int deleted = userMapper.deleteAll();
+    return deleted >= 0;
   }
 
   private WechatAuthDto wechatLogin(LoginDto loginDto) {

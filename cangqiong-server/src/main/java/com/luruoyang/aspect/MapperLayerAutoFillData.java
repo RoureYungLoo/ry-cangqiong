@@ -50,7 +50,6 @@ public class MapperLayerAutoFillData {
         setCreateTime.invoke(arg, now);
       } catch (Exception e) {
         log.warn(" [warn]: {}", e.getMessage());
-        e.printStackTrace();
       }
 
       try {
@@ -59,7 +58,6 @@ public class MapperLayerAutoFillData {
         setUpdateTime.invoke(arg, now);
       } catch (Exception e) {
         log.warn(" [warn]: {}", e.getMessage());
-        e.printStackTrace();
       }
 
       try {
@@ -68,7 +66,6 @@ public class MapperLayerAutoFillData {
         setCreateUser.invoke(arg, currentUser);
       } catch (Exception e) {
         log.warn(" [warn]: {}", e.getMessage());
-        e.printStackTrace();
       }
 
       try {
@@ -77,7 +74,6 @@ public class MapperLayerAutoFillData {
         setUpdateUser.invoke(arg, currentUser);
       } catch (Exception e) {
         log.warn(" [warn]: {}", e.getMessage());
-        e.printStackTrace();
       }
 
       log.error("==============>>>>>>>>>>>>>>>>> 前置通知 ");

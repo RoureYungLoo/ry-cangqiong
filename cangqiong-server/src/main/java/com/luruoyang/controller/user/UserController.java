@@ -1,10 +1,8 @@
 package com.luruoyang.controller.user;
 
+import cn.hutool.core.util.IdUtil;
 import com.luruoyang.dto.user.LoginDto;
-import com.luruoyang.entity.Category;
-import com.luruoyang.entity.Dish;
-import com.luruoyang.entity.Merchant;
-import com.luruoyang.entity.Setmeal;
+import com.luruoyang.entity.*;
 import com.luruoyang.service.MerchantService;
 import com.luruoyang.service.admin.CategoryService;
 import com.luruoyang.service.admin.DishService;
@@ -17,9 +15,11 @@ import com.luruoyang.utils.Result;
 import com.luruoyang.vo.DishItemVo;
 import com.luruoyang.vo.DishVo;
 import com.luruoyang.vo.LoginUserVo;
+import io.jsonwebtoken.lang.Objects;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -78,5 +78,50 @@ public class UserController {
   public Result findDishBySetmealId(@PathVariable("setmealId") Long setmealId) {
     List<DishItemVo> dishItemVoList = setmealDishService.findDishBySetmealId(setmealId);
     return Result.success(dishItemVoList);
+  }
+
+  @Operation(summary = "添加用户")
+  @PostMapping
+  public Result save(@RequestBody User user) {
+//    if (Objects.isEmpty(user.getId())) {
+//      user.setId(IdUtil.getSnowflakeNextId());
+//    }
+
+    if (ObjectUtils.isNotEmpty(userService.save(user))) {
+      return Result.success();
+    } else {
+      return Result.fail();
+    }
+  }
+
+  @Operation(summary = "根据ID查询")
+  @GetMapping
+  public Result getUserById(@RequestParam("userId") Long userId) {
+    User user = userService.getById(userId);
+    if (ObjectUtils.isNotEmpty(user)) {
+      return Result.success(user);
+    } else {
+      return Result.fail();
+    }
+  }
+
+  @Operation(summary = "根据ID删除")
+  @DeleteMapping("/{userId:\\d+}")
+  public Result deleteUserById(@PathVariable("userId") Long userId) {
+    if (userService.deleteById(userId)) {
+      return Result.success();
+    } else {
+      return Result.fail();
+    }
+  }
+
+  @Operation(summary = "删除所有")
+  @DeleteMapping("/all")
+  public Result deleteAll() {
+    if (userService.deleteAll()) {
+      return Result.success();
+    } else {
+      return Result.fail();
+    }
   }
 }

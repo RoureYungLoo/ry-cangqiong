@@ -6,6 +6,7 @@ import com.luruoyang.mapper.MerchantMapper;
 import com.luruoyang.service.MerchantService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class MerchantServiceImpl implements MerchantService {
   private MerchantMapper merchantMapper;
 
   @Override
-
+  @Cacheable(cacheNames = "merchant",key = "#merId")
   public Merchant findById(Long merId) {
 
     Merchant merchant = merchantMapper.findById(merId);

@@ -23,7 +23,7 @@ public class UserLoginInterceptor implements HandlerInterceptor {
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
     String token = request.getHeader(jwtProperties.getUserTokenName());
 
-    log.info("UserLoginInterceptor#preHandle:{}", token);
+    // log.info("UserLoginInterceptor#preHandle:{}", token);
 
     if (jwtUtils.check(token, jwtProperties.getUserSecretKey())) {
       return true;

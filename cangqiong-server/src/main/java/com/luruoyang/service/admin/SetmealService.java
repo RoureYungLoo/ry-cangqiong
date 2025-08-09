@@ -20,5 +20,10 @@ public interface SetmealService {
 
   boolean updateStatusById(SetmealDto setmealDto);
 
+  /**
+   * 根据分类id查询套餐
+   * @param categoryId
+   * @return
+   */
   List<Setmeal> findByCategoryId(Long categoryId);
 }

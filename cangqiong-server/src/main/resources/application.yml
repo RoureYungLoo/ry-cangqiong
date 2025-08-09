@@ -8,10 +8,12 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   data:
     redis:
+      database: 0
       host: 192.168.100.132
       port: 6379
       password: Redis123!
-
+  cache:
+    type: redis
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

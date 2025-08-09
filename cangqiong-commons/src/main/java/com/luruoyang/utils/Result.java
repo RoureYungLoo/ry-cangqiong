@@ -41,6 +41,6 @@ public class Result {
   }
 
   public static Result fail() {
-    return new Result(ResCode.FAIL, "failed", null);
+    return new Result(ResCode.FAIL, "failed", "");
   }
 }

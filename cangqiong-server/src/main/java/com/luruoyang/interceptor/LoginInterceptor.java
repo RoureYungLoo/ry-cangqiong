@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+/**
+ * @author luruoyang
+ */
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
 
@@ -18,7 +21,7 @@ public class LoginInterceptor implements HandlerInterceptor {
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
     String token = request.getHeader("Token");
 
-    if (jwtUtils.check(token)) {
+    if (jwtUtils.check(token,null)) {
       return true;
     } else {
       response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

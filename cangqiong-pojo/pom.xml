@@ -3,20 +3,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>cangqiong-pojo</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>cangqion-pojo</name>
     <description>cangqion-pojo</description>
     <parent>
         <groupId>com.luruoyang</groupId>
-        <artifactId>cangqiong</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <artifactId>ry-cangqiong</artifactId>
+        <version>1.0.0</version>
     </parent>
 
     <dependencies>
         <dependency>
             <groupId>com.luruoyang</groupId>
             <artifactId>cangqiong-commons</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.github.xiaoymin</groupId>

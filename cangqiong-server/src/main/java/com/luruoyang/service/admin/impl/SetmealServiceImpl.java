@@ -17,6 +17,9 @@ import com.luruoyang.vo.SetmealVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -33,6 +36,13 @@ public class SetmealServiceImpl implements SetmealService {
   @Autowired
   private SetmealDishService setmealDishService;
 
+  /**
+   * save setMeal
+   *
+   * @param setmealDto dto
+   * @return true or false
+   */
+  @CacheEvict(cacheNames = "setmealCache", key = "#setmealDto.categoryId")
   @Override
   public boolean save(SetmealDto setmealDto) {
 
@@ -70,6 +80,13 @@ public class SetmealServiceImpl implements SetmealService {
     return PageResult.getPageResult(page.getTotal(), page.getResult());
   }
 
+  /**
+   * delete setMeals by their ids
+   *
+   * @param ids ids
+   * @return true or false
+   */
+  @CacheEvict(cacheNames = "setmealCache", allEntries = true)
   @Override
   public boolean deleteBatch(List<Long> ids) {
 
@@ -93,11 +110,26 @@ public class SetmealServiceImpl implements SetmealService {
     return true;
   }
 
+  /**
+   * find setmeal by setmealId
+   *
+   * @param setmealId setmealId
+   * @return SetmealVo
+   */
+  @Cacheable(cacheNames = "setmealCache",key = "#setmealId")
   @Override
   public SetmealVo findById(Long setmealId) {
-    return setmealMapper.findById(setmealId);
+    SetmealVo vo = setmealMapper.findById(setmealId);
+    return vo;
   }
 
+  /**
+   * update setmeal
+   *
+   * @param setmealDto
+   * @return
+   */
+  @CacheEvict(cacheNames = "setmealCache", allEntries = true)
   @Override
   public boolean updateById(SetmealDto setmealDto) {
     Setmeal setmeal = new Setmeal();
@@ -119,6 +151,7 @@ public class SetmealServiceImpl implements SetmealService {
     return true;
   }
 
+  @CacheEvict(cacheNames = "setmealCache", allEntries = true)
   @Override
   public boolean updateStatusById(SetmealDto setmealDto) {
     Setmeal setmeal = new Setmeal();
@@ -139,9 +172,16 @@ public class SetmealServiceImpl implements SetmealService {
     return row > 0;
   }
 
+  /**
+   * 根据分类id查询套餐
+   *
+   * @param categoryId 分类ID
+   * @return List<Setmeal>
+   */
+  @Cacheable(cacheNames = "setmealCache::categoryId", key = "#categoryId")
   @Override
   public List<Setmeal> findByCategoryId(Long categoryId) {
-    List<Setmeal> setmealList =  setmealMapper.findByCategroyId(categoryId);
+    List<Setmeal> setmealList = setmealMapper.findByCategroyId(categoryId);
     return setmealList;
   }
 }

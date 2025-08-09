@@ -84,7 +84,7 @@ public class JJwtUtils {
     Claims claims = null;
     try {
       claims = parse(token, secret);
-      log.info("parsed claims: {}", claims);
+      // log.info("parsed claims: {}", claims);
       /* 设置ThreadLocal */
       Object currentUser = claims.get("id");
       if (currentUser == null) {

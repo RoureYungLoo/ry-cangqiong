@@ -7,7 +7,7 @@
             keyProperty="id" keyColumn="id">
         insert into address_book
         VALUES (#{id},
-                #{useId},
+                #{userId},
                 #{consignee},
                 #{sex},
                 #{phone},
@@ -30,34 +30,34 @@
             <if test="consignee !=null and consignee!=''">
                 consignee = #{consignee},
             </if>
-            <if test="sex !=null and !='' ">
+            <if test="sex !=null and sex !='' ">
                 sex = #{sex},
             </if>
-            <if test="phone !=null and !='' ">
+            <if test="phone !=null and phone !='' ">
                 phone = #{phone},
             </if>
-            <if test="provinceCode !=null and !='' ">
+            <if test="provinceCode !=null and provinceCode !='' ">
                 province_code = #{provinceCode},
             </if>
-            <if test="provinceName !=null and !='' ">
+            <if test="provinceName !=null and  provinceName !='' ">
                 province_name = #{provinceName},
             </if>
-            <if test="cityCode !=null and !='' ">
+            <if test="cityCode !=null and cityCode !='' ">
                 city_code = #{cityCode},
             </if>
-            <if test="cityName !=null and !='' ">
+            <if test="cityName !=null and cityName !='' ">
                 city_name = #{cityName},
             </if>
-            <if test="districtCode !=null and !='' ">
+            <if test="districtCode !=null and districtCode !='' ">
                 district_code = #{districtCode},
             </if>
-            <if test=" districtName !=null and !='' ">
+            <if test=" districtName !=null and districtName !='' ">
                 district_name = #{districtName},
             </if>
-            <if test="detail !=null and !='' ">
+            <if test="detail !=null and detail !='' ">
                 detail = #{detail},
             </if>
-            <if test="label !=null and !='' ">
+            <if test="label !=null and label !='' ">
                 label = #{label},
             </if>
             <if test="isDefault !=null">
@@ -91,11 +91,11 @@
         <include refid="baseAddressMap"/>
         from address_book
         <where>
-            <if test="user_id!=null">
-                user_id = #{userId}
+            <if test="userId!=null">
+                and user_id = #{userId}
             </if>
-            <if test="is_default != null">
-                is_default = #{isDefault}
+            <if test="isDefault != null">
+               and is_default = #{isDefault}
             </if>
         </where>
 
